@@ -35,9 +35,6 @@ tmp-clearbox/
 *.pof
 *.sld
 *.qarlog
-# .qpf/.qsf sao regeneraveis com quartus/criar_projeto.tcl
-*.qpf
-*.qsf
 
 # ===== Sistema / editores =====
 Thumbs.db
