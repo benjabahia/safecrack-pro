@@ -61,6 +61,7 @@ proc atribuir_vetor {nome pinos {iostd ""}} {
 
 # --- Clock -----------------------------------------------------------
 set_location_assignment PIN_Y2 -to CLOCK_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_50
 
 # --- Botoes (ativos em nivel baixo) ----------------------------------
 # KEY[0]=reset, KEY[1]=confirma, KEY[2]=incrementa, KEY[3]=decrementa

@@ -256,8 +256,6 @@ Todos os slacks são positivos (TNS = 0). O circuito suporta até cerca de 119 M
 
 ### Resultados na placa
 
-> **TODO:** preencher depois do teste na DE2-115 (o que funcionou, fotos/vídeo, tempos medidos dos LEDs, comportamento ao ligar a placa).
-
 ---
 
 ## 7. Decisões de projeto (pontos ambíguos da especificação)
@@ -284,10 +282,11 @@ Limitações conhecidas (comportamento correto dentro do uso previsto):
 - A senha precisa ter só dígitos de 0 a 9 em cada posição hexadecimal (por exemplo, `16'h12A4` nunca seria aceita).
 - O arquivo `sim/safecrack_pro.mpf` gerado pelo ModelSim guarda caminhos absolutos. Por isso ele não é versionado: basta rodar `sim/criar_projeto.do` de novo em outra máquina ou pasta.
 
-- A compilação no Quartus termina com 6 warnings, nenhum crítico:
+- A compilação no Quartus termina com 7 warnings, nenhum crítico:
   - 4× aviso de número de processadores não definido (`NUM_PARALLEL_PROCESSORS`);
   - 1× aviso de LogicLock indisponível na edição Lite;
-  - 1× aviso "Some pins have incomplete I/O assignments" (15714): `CLOCK_50` e `KEY` não têm I/O standard explícito e ficam no padrão do Quartus (2,5 V). O I/O standard 2,5 V foi definido só nos LEDs e displays.
+  - 1× aviso "Some pins have incomplete I/O assignments" (15714): os `KEY` não têm I/O standard explícito e ficam no padrão do Quartus (2,5 V). O `CLOCK_50` está em 3,3-V LVTTL e os LEDs e displays em 2,5 V;
+  - 1× aviso (169177): 1 pino precisa atender aos requisitos Intel para interfaces de 3,3/3,0/2,5 V (AN 447), consequência do `CLOCK_50` em 3,3-V LVTTL.
 
 > **TODO (fase da placa):** registrar aqui qualquer problema encontrado no teste com a DE2-115.
 
