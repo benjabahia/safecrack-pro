@@ -51,6 +51,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE ../src/safecrack_top.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../src/temporizador.sv
 set_global_assignment -name SDC_FILE safecrack_pro.sdc
 set_location_assignment PIN_Y2 -to CLOCK_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_50
 set_location_assignment PIN_M23 -to KEY[0]
 set_location_assignment PIN_M21 -to KEY[1]
 set_location_assignment PIN_N21 -to KEY[2]
