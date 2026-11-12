@@ -221,9 +221,42 @@ Requer Quartus Prime Lite 20.1 com suporte a Cyclone IV.
    ```
 4. **Testar**: aperte KEY[0], digite 1-2-3-4 com KEY[2]/KEY[3] e KEY[1], e confira os LEDs verdes por 5 s. Depois teste uma senha errada (LEDs vermelhos por 3 s).
 
+### Resultados da compilação (Quartus Prime Lite 20.1.1)
+
+A compilação completa terminou com **0 erros** e gerou `quartus/output_files/safecrack_pro.sof`.
+
+As restrições de timing estão em `quartus/safecrack_pro.sdc`:
+- `create_clock` de 20 ns (50 MHz) no pino `CLOCK_50`;
+- `derive_clock_uncertainty`;
+- `set_false_path` nos botões, que são assíncronos e passam pelo sincronizador;
+- `set_false_path` nos LEDs e displays, que são lidos por uma pessoa.
+
+Com isso o Timing Analyzer não acusa mais o *Critical Warning 332148 (Timing requirements not met)* e não há caminhos sem restrição.
+
+**Uso de recursos (EP4CE115F29C7):**
+
+| Recurso | Usado | Disponível |
+|---|---|---|
+| Elementos lógicos (LEs) | 146 | 114.480 (< 1 %) |
+| Funções combinacionais | 140 | 114.480 (< 1 %) |
+| Registradores | 70 | 114.480 (< 1 %) |
+| Pinos | 67 | 529 (13 %) |
+| Bits de memória | 0 | 3.981.312 (0 %) |
+| Multiplicadores 9 bits / PLLs | 0 / 0 | 532 / 4 |
+
+**Timing (clock `CLOCK_50`, restrição de 20 ns = 50 MHz):**
+
+| Modelo | Fmax | Setup slack | Hold slack |
+|---|---|---|---|
+| Slow 1200 mV 85 °C (pior caso) | **118,99 MHz** | **+11,596 ns** | +0,404 ns |
+| Slow 1200 mV 0 °C | 128,85 MHz | +12,239 ns | +0,355 ns |
+| Fast 1200 mV 0 °C | — | +15,843 ns | +0,183 ns |
+
+Todos os slacks são positivos (TNS = 0). O circuito suporta até cerca de 119 MHz no pior caso, mais que o dobro dos 50 MHz da placa.
+
 ### Resultados na placa
 
-> **TODO:** preencher depois do teste na DE2-115 (o que funcionou, fotos/vídeo, tempos medidos dos LEDs, comportamento ao ligar a placa, e uso de recursos e Fmax do relatório de compilação).
+> **TODO:** preencher depois do teste na DE2-115 (o que funcionou, fotos/vídeo, tempos medidos dos LEDs, comportamento ao ligar a placa).
 
 ---
 
@@ -251,7 +284,12 @@ Limitações conhecidas (comportamento correto dentro do uso previsto):
 - A senha precisa ter só dígitos de 0 a 9 em cada posição hexadecimal (por exemplo, `16'h12A4` nunca seria aceita).
 - O arquivo `sim/safecrack_pro.mpf` gerado pelo ModelSim guarda caminhos absolutos. Por isso ele não é versionado: basta rodar `sim/criar_projeto.do` de novo em outra máquina ou pasta.
 
-> **TODO (fase da placa):** registrar aqui qualquer problema encontrado na síntese (warnings relevantes do Quartus, timing) ou no teste com a DE2-115.
+- A compilação no Quartus termina com 6 warnings, nenhum crítico:
+  - 4× aviso de número de processadores não definido (`NUM_PARALLEL_PROCESSORS`);
+  - 1× aviso de LogicLock indisponível na edição Lite;
+  - 1× aviso "Some pins have incomplete I/O assignments" (15714): `CLOCK_50` e `KEY` não têm I/O standard explícito e ficam no padrão do Quartus (2,5 V). O I/O standard 2,5 V foi definido só nos LEDs e displays.
+
+> **TODO (fase da placa):** registrar aqui qualquer problema encontrado no teste com a DE2-115.
 
 ---
 
@@ -271,6 +309,8 @@ sim/
   criar_projeto.do           cria o projeto .mpf do ModelSim
 quartus/
   criar_projeto.tcl          cria o projeto Quartus + pinos
+  safecrack_pro.qpf/.qsf     projeto Quartus (dispositivo, arquivos, pinos)
+  safecrack_pro.sdc          restrições de timing (clock de 50 MHz)
 docs/
   PINOS_DE2-115.md           pinos usados
   wave_*.png                 capturas das waveforms

@@ -35,6 +35,9 @@ set_global_assignment -name DEVICE EP4CE115F29C7
 set_global_assignment -name TOP_LEVEL_ENTITY $TOP_LEVEL
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 
+# --- Restricoes de timing (clock de 50 MHz) --------------------------
+set_global_assignment -name SDC_FILE safecrack_pro.sdc
+
 # --- Arquivos fonte (src/*.sv) ---------------------------------------
 foreach f [lsort [glob -nocomplain -directory $SRC_DIR *.sv]] {
     set_global_assignment -name SYSTEMVERILOG_FILE ../src/[file tail $f]
