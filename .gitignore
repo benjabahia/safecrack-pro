@@ -1,0 +1,48 @@
+# ===== Instaladores e arquivos grandes (nao versionar) =====
+*.exe
+*.qdz
+*.zip
+
+# ===== ModelSim / Questa =====
+work/
+transcript
+*.wlf
+wlft*
+*.vstf
+# projeto .mpf e regeneravel com sim/criar_projeto.do (guarda caminhos absolutos)
+*.mpf
+*.cr.mti
+# modelsim.ini local e recriado pelo vmap (sim/simular.do)
+modelsim.ini
+
+# ===== Quartus Prime =====
+db/
+incremental_db/
+output_files/
+simulation/
+greybox_tmp/
+qdb/
+tmp-clearbox/
+.qsys_edit/
+*.qws
+*.rpt
+*.summary
+*.smsg
+*.done
+*.jdi
+*.pin
+*.sof
+*.pof
+*.sld
+*.qarlog
+# .qpf/.qsf sao regeneraveis com quartus/criar_projeto.tcl
+*.qpf
+*.qsf
+
+# ===== Sistema / editores =====
+Thumbs.db
+desktop.ini
+.DS_Store
+*.bak
+*~
+.vscode/
