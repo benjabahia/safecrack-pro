@@ -6,7 +6,7 @@ Cofre digital com senha de 4 dígitos implementado em SystemVerilog para a placa
 |---|---|
 | **Disciplina** | CIN0130 – Sistemas Digitais |
 | **Professor** | Victor Medeiros |
-| **Semestre** | 2026.1 |
+| **Semestre** | 2026.2 |
 
 ### Integrantes
 
