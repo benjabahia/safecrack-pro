@@ -10,12 +10,11 @@ Cofre digital com senha de 4 dígitos implementado em SystemVerilog para a placa
 
 ### Integrantes
 
-| Nome | Parte do código explicada no vídeo |
+| Nome | Parte explicada no vídeo |
 |---|---|
-| <!-- TODO --> | <!-- TODO --> |
-| <!-- TODO --> | <!-- TODO --> |
-| <!-- TODO --> | <!-- TODO --> |
-| <!-- TODO --> | <!-- TODO --> |
+| | FSM (`cofre_fsm.sv`) |
+| | Botões e displays (`detector_borda.sv` e `decodificador_7seg.sv`) |
+| | Temporizador, módulo topo e simulação |
 
 ---
 
@@ -256,6 +255,17 @@ Todos os slacks são positivos (TNS = 0). O circuito suporta até cerca de 119 M
 
 ### Resultados na placa
 
+O `safecrack_pro.sof` foi gravado na DE2-115 pelo USB-Blaster (Quartus 20.1.1) e os testes funcionaram:
+
+- estado inicial: displays HEX3..HEX0 em 0 e HEX4 em 1;
+- incrementar e decrementar o dígito ativo;
+- wrap-around 0↔9;
+- botão segurado muda o dígito uma vez só;
+- confirmar avança o HEX4 de 1 a 4;
+- senha correta 1-2-3-4: todos os LEDs verdes acendem por 5 s;
+- senha errada: os LEDs vermelhos acendem por 3 s;
+- reset no meio da digitação volta ao início.
+
 ---
 
 ## 7. Decisões de projeto (pontos ambíguos da especificação)
@@ -288,7 +298,7 @@ Limitações conhecidas (comportamento correto dentro do uso previsto):
   - 1× aviso "Some pins have incomplete I/O assignments" (15714): os `KEY` não têm I/O standard explícito e ficam no padrão do Quartus (2,5 V). O `CLOCK_50` está em 3,3-V LVTTL e os LEDs e displays em 2,5 V;
   - 1× aviso (169177): 1 pino precisa atender aos requisitos Intel para interfaces de 3,3/3,0/2,5 V (AN 447), consequência do `CLOCK_50` em 3,3-V LVTTL.
 
-> **TODO (fase da placa):** registrar aqui qualquer problema encontrado no teste com a DE2-115.
+Nenhum problema encontrado nos testes na placa.
 
 ---
 
