@@ -12,9 +12,9 @@ Cofre digital com senha de 4 dígitos implementado em SystemVerilog para a placa
 
 | Nome | Parte explicada no vídeo |
 |---|---|
-| | FSM (`cofre_fsm.sv`) |
-| | Botões e displays (`detector_borda.sv` e `decodificador_7seg.sv`) |
-| | Temporizador, módulo topo e simulação |
+| Benjamim d'Albuquerque Bahia Vanderlei <bdabv> | FSM (`cofre_fsm.sv`) |
+| João Vitor de Godoy e Vasconcelos Galvão <jvgvg> | Botões e displays (`detector_borda.sv` e `decodificador_7seg.sv`) |
+| Miguel Remides Pereira Oliveira <mrpo> | Temporizador, módulo topo e simulação |
 
 ---
 
