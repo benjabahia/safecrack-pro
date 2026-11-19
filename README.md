@@ -1,5 +1,7 @@
 # SafeCrack Pro
 
+> **Vídeo de demonstração (YouTube, não listado):** https://youtu.be/lKOHjd2qt4g
+
 Cofre digital com senha de 4 dígitos implementado em SystemVerilog para a placa **DE2-115** (FPGA Cyclone IV E EP4CE115F29C7).
 
 | | |
